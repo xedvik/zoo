@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Zoo MySQL",
+        "type": "mysql",
+        "host": "localhost",
+        "port": 3307,
+        "username": "zoo_user",
+        "password": "zoo_password",
+        "database": "zoo"
+    }
+]

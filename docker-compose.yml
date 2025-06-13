@@ -48,12 +48,24 @@ services:
             - mysql_data:/var/lib/mysql
             - ./docker/mysql/my.cnf:/etc/mysql/my.cnf
         ports:
-            - "3306:3306"
+            - "3307:3306"
         healthcheck:
             test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
             interval: 10s
             timeout: 5s
             retries: 5
+
+    cron:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - .:/var/www/html
+            - ./docker/cron/crontab:/etc/cron.d/laravel-scheduler
+        command: >
+            bash -c "crontab /etc/cron.d/laravel-scheduler && cron -f"
+        depends_on:
+            - app
 
 volumes:
     mysql_data:
