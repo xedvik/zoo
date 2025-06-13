@@ -84,7 +84,7 @@ abstract class AbstractAnimal implements AnimalInterface
      */
     public function reproduce(): void
     {
-        // Реализуется в дочерних классах
+        // Заглушка
     }
 
     /**

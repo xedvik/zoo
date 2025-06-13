@@ -58,14 +58,19 @@ services:
     cron:
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: docker/cron/Dockerfile
+        container_name: zoo-cron
         volumes:
             - .:/var/www/html
-            - ./docker/cron/crontab:/etc/cron.d/laravel-scheduler
-        command: >
-            bash -c "crontab /etc/cron.d/laravel-scheduler && cron -f"
         depends_on:
             - app
+            - mysql
+        environment:
+            - DB_HOST=mysql
+            - DB_PORT=3306
+            - DB_DATABASE=${DB_DATABASE}
+            - DB_USERNAME=${DB_USERNAME}
+            - DB_PASSWORD=${DB_PASSWORD}
 
 volumes:
     mysql_data:

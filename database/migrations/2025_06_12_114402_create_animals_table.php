@@ -15,15 +15,15 @@ class CreateAnimalsTable extends Migration
     {
         Schema::create('animals', function (Blueprint $table) {
             $table->id();
-    $table->string('name');
-    $table->enum('gender', ['m', 'f']); // пол
-    $table->unsignedTinyInteger('age')->default(0); // возраст 0-30
-    $table->unsignedTinyInteger('satiety')->default(100); // сытость 0–100
-    $table->boolean('is_alive')->default(true); // жив ли животное
-    $table->string('class');   // mammal, reptile, и т.д.
-    $table->string('species'); // gazelle, bear, и т.д.
-    $table->foreignId('enclosure_id')->constrained()->onDelete('cascade'); // связь с enclosure
-    $table->timestamps();
+            $table->foreignId('enclosure_id')->constrained()->onDelete('cascade'); // связь с enclosure
+            $table->string('name');
+            $table->enum('gender', ['m', 'f']); // пол
+            $table->unsignedTinyInteger('age')->default(0); // возраст 0-30
+            $table->unsignedTinyInteger('satiety')->default(100); // сытость 0–100
+            $table->boolean('is_alive')->default(true); // жив ли животное
+            $table->string('class');   // mammal, reptile, и т.д.
+            $table->string('species'); // gazelle, bear, и т.д.
+            $table->timestamps();
         });
     }
 

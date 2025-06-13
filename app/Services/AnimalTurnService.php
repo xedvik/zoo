@@ -9,7 +9,6 @@ use App\Repositories\Interfaces\BiographyRepositoryInterface;
 use App\Repositories\Interfaces\EnclosureRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Eloquent\Collection;
 
 /**
  * Сервис для обработки ходов животных
@@ -131,12 +130,10 @@ class AnimalTurnService
                 $animal->getSatiety()
             ));
 
-            // Еда уменьшена в enclosure — сохраняем его
-            $enclosure = $model->enclosure()->first();
-            $this->enclosureRepository->save($enclosure);
+            $this->enclosureRepository->save($model->enclosure);
             $this->log($animal, sprintf(
                 'В вольере осталось %d единиц еды',
-                $this->enclosureRepository->getFoodAmount($enclosure)
+                $this->enclosureRepository->getFoodAmount($model->enclosure)
             ));
         } else {
             $this->log($animal, sprintf(
